@@ -1,0 +1,43 @@
+---
+title: "Thailand Postal Codes"
+author: "Mekin Lertanuntasuk"
+date: "7/15/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message =FALSE)
+```
+
+```{r include=FALSE}
+library(leaflet)
+```
+
+## Introduction
+
+This project is part of the Developing Data Products course on Coursera.org. The aim of this project is to create a web page featuring an interactive map created with Leaflet.
+
+## Map of Thailand Postal Codes
+
+We are using the location data from https://www.aggdata.com/free/thailand-postal-codes to plot the longitude and latitude of each postal code on the map. The result map can be seen below:
+
+```{r echo=FALSE}
+## Get the location data
+fileUrl <- "https://www.aggdata.com/download_sample.php?file=th_postal_codes.csv"
+download.file(fileUrl, destfile ="./th_postal_codes.csv", method = "curl")
+location_data = read.csv(file='th_postal_codes.csv', header =T)
+```
+
+```{r echo=FALSE}
+location_data %>%
+    leaflet() %>% 
+    addTiles() %>%
+    addMarkers(clusterOptions = markerClusterOptions(), popup = location_data$Place.Name)
+```
+
+
+
+
+
+
+
