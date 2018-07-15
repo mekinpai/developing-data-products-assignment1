@@ -32,7 +32,7 @@ location_data = read.csv(file='th_postal_codes.csv', header =T)
 location_data %>%
     leaflet() %>% 
     addTiles() %>%
-    addMarkers(clusterOptions = markerClusterOptions(), popup = location_data$Place.Name)
+    addMarkers(clusterOptions = markerClusterOptions(), popup = paste(location_data$Postal.Code,location_data$Place.Name, sep=" : "))
 ```
 
 
